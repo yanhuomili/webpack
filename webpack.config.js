@@ -59,7 +59,11 @@ module.exports = {
   // devtool: 'eval-source-map',
   resolve: {
     // 解析第三方包
-    modules: [path.resolve('node_modules')]
+    // modules: [path.resolve('node_modules')],
+    alias: {
+      // 配置别名
+      views: '@/views'
+    }
   },
   externals: {
     // 通过script外部引入的cdn模块，需要做此配置。打包的时候不作为依赖项，否则会打包失败
