@@ -43,3 +43,4 @@ img.src = pic
 img.style.width = '300px'
 img.style.height = '300px'
 $('body').append(img)
+console.log('aa')

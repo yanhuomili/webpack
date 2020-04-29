@@ -85,8 +85,9 @@ yarn add eslint eslint-loader
 
 # webpack 打包图片
 
-- file-loader :默认会在内部生成一张图片到 dist 目录下，并把图片的名字返回来
-- html-withimg-loader :打包 html 标签里面 img 标签引用的图片
+- file-loader :默认会在内部生成一张图片到 dist 目录下，并把图片的名字返回来,使用 file-loader 可以决绝背景图片，以及 js 动态生成的图片问题
+- html-withimg-loader :打包 html 标签里面 img 标签引用的图片，如果 html 是引用静态文件里面的图片则不需要打包
+- url-loader :
 
 项目中使用图片的方法  
 1.js 中创建图片  
@@ -96,4 +97,43 @@ yarn add eslint eslint-loader
 ```
 yarn add file-loader -D
 yarn add html-withimg-loader -D
+yarn add url-loader -D
 ```
+
+# watch 的用法
+
+- 监控当前代码变化，代码改了，实时编译打包
+
+# webpack 小插件
+
+- cleanWebpackPlugin : 打包前先把打包生成的文件夹清除掉，打包后生成一个新的文件夹
+- copyWebpackPlugin : 文件复制插件，打包时候可以把不需要打包的图片、字体文件夹复制到打包后的文件夹里面
+- bannerPlugin : 内置的插件，版权生面，在打包后的文件里面会加上注释文字
+
+# webpack 的跨域问题
+
+- proxy : 通过本地服务代理来解决
+- 在 webpack 本地服务写接口：在 devServer.before 钩子里面写接口代码，因为接口服务就是 webpack-dev-server,前后端都在同一个服务里面，这时候不会产生跨域问题
+- 在后端接口服务里面启动 webpack 服务:
+
+```javascript
+/* server.js */
+
+let webpack = require('webpack')
+let express = require('express')
+let app = express()
+/* 中间件 */
+let middle = require('webpack-dev-middleware') // 引入中间件
+let config = require('./webpack.config.js') // 引入本地的webpack配置
+let compiler = webpack(config) // 编译webpack的配置
+app.use(middle(compiler))
+
+app.get('/user', (req, res) => {
+  res.json({ name: '在后端服务中启动webpack服务' })
+})
+app.listen(3000)
+```
+
+# resolve
+
+- 解析第三方包

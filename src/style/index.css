@@ -1,4 +1,7 @@
 body {
-  /* background: url(../assets/image/2.png); */
+  margin: 0;
+  padding: 0;
+  /* background: url(../assets/image/3.jpg); */
   transform: translateY(20px);
+  border: 1px solid red;
 }
