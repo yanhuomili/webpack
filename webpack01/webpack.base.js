@@ -44,7 +44,6 @@ module.exports = {
       }
     }
   },
-  mode: 'production', // 模式： production development
   entry: './src/main.js', // 入口文件
   output: {
     filename: 'app.[hash:8].js', // 打包后的文件名,添加hash之后每次打包都会生成新的文件，防止缓存问题，如：appe63cef629097af5ce5db.js?e63cef629097af5ce5db
@@ -107,7 +106,11 @@ module.exports = {
         to: './static'
       }
     ]),
-    new webpack.BannerPlugin('mark in 2020 by lihaohua')
+    new webpack.BannerPlugin('mark in 2020 by lihaohua'),
+    /* 定义环境变量 */
+    new webpack.DefinePlugin({
+      DEV: JSON.stringify('dev')
+    })
   ],
   module: {
     /* loader 处理从右往左，从下往上 */

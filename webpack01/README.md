@@ -137,3 +137,19 @@ app.listen(3000)
 # resolve
 
 - 解析第三方包
+- 配置别名
+
+# 定义环境
+
+- webpack-merge : webpack 配置文件合并插件，用于合并 webpack 的配置文件
+- webpack.DefinePlugin :webpack 内置的一个插件，用来定义环境变量
+
+# webpack 自带优化
+
+- tree-shaking: import 语法引入的文件，webpack 在生产模式下打包的时候，会自动去掉没有使用的变量或者方法，require 语法不支持 tree-shaking 优化
+- scope hosting :作用域提升，生产模式才有效，webpack 重自动省略可以简化的代码
+- splitChunks ：多页面应用抽取公用代码
+- import()：webpack 使用 import 语法来实现懒加载,vue、路由、react 懒加载都是使用 import 语法
+- hot :热更新，devServer 里面配置
+- new webpack.NamedChunksPlugin(), // 打印热更新的模块路径
+- new webpack.HotModuleReplacementPlugin(), // 热更新插件
