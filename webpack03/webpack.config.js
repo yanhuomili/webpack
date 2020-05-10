@@ -29,5 +29,4 @@ module.exports = {
       filename: 'index.html', // 打包后的模板文件名称
     }),
   ],
-  module: {},
 }
