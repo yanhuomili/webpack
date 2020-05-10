@@ -65,3 +65,13 @@ if (module.hot) {
     let str = require('./source')
   })
 }
+
+import Vue from 'vue'
+import Hellow from './views/hellow.vue'
+Vue.component('Hellow', Hellow)
+new Vue({
+  el: '#app',
+  data: {
+    msg: 'vue 演示数据',
+  },
+})

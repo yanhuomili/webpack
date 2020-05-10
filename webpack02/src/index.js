@@ -7,8 +7,7 @@
 // let r = moment().endOf('day').fromNow()
 // console.log(r)
 
-
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 let appDom = document.getElementById('app')
-render(<h1>jsx</h1>,appDom)
+render(<h1>jsx</h1>, appDom)

@@ -7,6 +7,7 @@ let { CleanWebpackPlugin } = require('clean-webpack-plugin')
 let CopyWebpackPlugin = require('copy-webpack-plugin')
 let webpack = require('webpack')
 let Happypack = require('happypack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   optimization: {
@@ -81,13 +82,14 @@ module.exports = {
     cheap-module-source-map :生产后可以保留起来
     cheap-module-eval-source-map: 不会产生文件，集成在打包后的文件中，不会产生列
  */
-  // devtool: 'eval-source-map',
+  devtool: 'eval-source-map',
   resolve: {
     // 解析第三方包
     // modules: [path.resolve('node_modules')],
     alias: {
       // 配置别名
       views: '@/views',
+      vue: 'vue/dist/vue.js', // 在webpack 中，使用 import Vue from ‘vue’ 导入的Vue 构造函数，功能并不完整，只提供了 runtime-only 的方式， 并没有提供像网页中那样的使用方式.
     },
   },
   // externals: {
@@ -108,6 +110,7 @@ module.exports = {
   //   ignored: /node_modules/ //不需要监控的文件
   // },
   plugins: [
+    new VueLoaderPlugin(),
     // 存放所有配置的插件
     new HtmlWebpackPlugin({
       template: './publish/index.html', // 使用的模板文件
@@ -174,6 +177,10 @@ module.exports = {
       //     }
       //   }
       // },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.js$/,
         use: {
