@@ -1,10 +1,11 @@
 let path = require('path')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let webpack = require('webpack')
+let VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   devServer: {
-    port: 8080,
+    port: 7777,
     progress: true, // 进度条
     compress: true, // 开启gzip压缩
   },
@@ -22,11 +23,28 @@ module.exports = {
       vue: 'vue/dist/vue.js',
     },
   },
+  module:{
+    rules:[
+      {
+        test: /\.vue$/,
+        use: ['vue-loader'],
+      },
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader']
+      },
+      {
+        test:/\.scss$/,
+        use:['style-loader','css-loader','sass-loader']
+      }
+    ],
+  },
   plugins: [
     // 存放所有配置的插件
     new HtmlWebpackPlugin({
       template: './index.html', // 使用的模板文件
       filename: 'index.html', // 打包后的模板文件名称
     }),
+    new VueLoaderPlugin() // 配合vue-loader使用
   ],
 }
